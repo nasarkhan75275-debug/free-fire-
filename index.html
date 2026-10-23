@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AL NASAR FF - FREE DIAMONDS</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#080808;color:#fff}
+:root{--y:#FFD700;--o:#FF6B00}
+header{display:flex;justify-content:space-between;padding:12px 15px;background:#111;border-bottom:2px solid var(--y);position:sticky;top:0;z-index:10}
+header h1{color:var(--y);font-weight:900;font-style:italic}
+.diamond-bar{background:#1a1a1a;padding:10px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
+.diamond-bar b{color:var(--y)}
+.hero{padding:20px;background:linear-gradient(#222,#080808);text-align:center;border-bottom:1px solid #222}
+.hero h2{font-size:32px;color:var(--y);font-style:italic;font-weight:900}
+.card{background:#151515;border:1px solid #222;border-radius:12px;padding:15px;margin:12px}
+.btn{width:100%;padding:12px;background:linear-gradient(90deg,var(--y),var(--o));color:#000;border:none;border-radius:8px;font-weight:900;cursor:pointer;margin-top:8px}
+.btn:active{transform:scale(0.97)}
+input{width:100%;padding:11px;background:#000;border:1px solid #333;border-radius:6px;color:#fff;margin-top:6px}
+#gameCanvas{width:100%;background:#000;border:2px solid var(--y);border-radius:10px;display:block;margin-top:10px;touch-action:none}
+.controls{display:flex;gap:10px;margin-top:8px}
+.controls button{flex:1;padding:12px;background:#222;color:#fff;border:1px solid #333;border-radius:8px;font-weight:800}
+</style>
+</head>
+<body>
+<div style="max-width:480px;margin:0 auto;padding-bottom:20px">
+
+<header>
+<h1>AL NASAR FF</h1>
+<div><i class="fa-solid fa-gem" style="color:var(--y)"></i> <span id="diamondCount">0</span></div>
+</header>
+
+<div class="diamond-bar">
+<span>💎 Your Diamonds</span>
+<b id="dCount2">0 Diamonds</b>
+</div>
+
+<div class="hero">
+<h2>BOOYAH! FREE DIAMONDS</h2>
+<p style="color:#aaa;font-size:13px;margin-top:5px">Offline khelo, Zombie maro, Free Diamond kamao</p>
+</div>
+
+<!-- 1. FREE GIFT -->
+<div class="card">
+<h3 style="color:var(--y)"><i class="fa-solid fa-gift"></i> DAILY FREE GIFT</h3>
+<p style="font-size:12px;color:#aaa;margin:6px 0">Roz 100 Diamond free milega — bas claim karo</p>
+<button class="btn" onclick="claimFree()">CLAIM 100 FREE DIAMONDS 🎁</button>
+<p id="claimMsg" style="font-size:12px;color:#0f0;margin-top:6px;display:none"></p>
+</div>
+
+<!-- 2. OFFLINE ZOMBIE GAME -->
+<div class="card">
+<h3 style="color:var(--y)"><i class="fa-solid fa-skull"></i> OFFLINE ZOMBIE MODE</h3>
+<p style="font-size:12px;color:#aaa;margin:6px 0">Ye game bina internet ke chalta hai. Zombie maro = Diamond milega</p>
+<canvas id="gameCanvas" width="320" height="180"></canvas>
+<div class="controls">
+<button onclick="moveLeft()">◀ LEFT</button>
+<button onclick="shoot()" style="background:var(--y);color:#000">🔫 SHOOT</button>
+<button onclick="moveRight()">RIGHT ▶</button>
+</div>
+<div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px">
+<span>Score: <b id="score">0</b></span>
+<span>Zombies Killed: <b id="kills">0</b></span>
+</div>
+<button class="btn" style="background:#222;color:#fff;border:1px solid #333" onclick="startGame()">START / RESTART GAME</button>
+</div>
+
+<!-- 3. SHOP -->
+<div class="card">
+<h3 style="color:var(--y)">REWARD SHOP</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+<div style="background:#000;padding:10px;border-radius:8px;text-align:center;border:1px solid #222"><p>🎁 50 💎</p><button class="btn" style="padding:6px;font-size:12px" onclick="spend(50)">FREE CLAIM</button></div>
+<div style="background:#000;padding:10px;border-radius:8px;text-align:center;border:1px solid var(--y)"><p>🔥 500 💎</p><button class="btn" style="padding:6px;font-size:12px" onclick="alert('500 diamonds ke liye 5 zombie maro!')">PLAY & WIN</button></div>
+</div>
+</div>
+
+</div>
+
+<script>
+// DIAMOND SYSTEM
+let diamonds = parseInt(localStorage.getItem('ff_diamonds')||'0');
+function updateDiamond(){document.getElementById('diamondCount').innerText=diamonds;document.getElementById('dCount2').innerText=diamonds+' Diamonds';localStorage.setItem('ff_diamonds',diamonds);}
+updateDiamond();
+
+function claimFree(){
+ let last = localStorage.getItem('ff_lastClaim');
+ let now = Date.now();
+ if(last && now - last < 10000){ // 10 sec demo, asli me 24h kar dena
+   document.getElementById('claimMsg').style.display='block';
+   document.getElementById('claimMsg').innerText='Thodi der baad try karo! Demo me 10 sec ka cooldown hai';
+   return;
+ }
+ diamonds+=100;
+ localStorage.setItem('ff_lastClaim',now);
+ updateDiamond();
+ document.getElementById('claimMsg').style.display='block';
+ document.getElementById('claimMsg').innerText='BOOYAH! 100 Diamonds mil gaye 💎';
+}
+function spend(a){ if(diamonds>=a){diamonds-=a;updateDiamond();alert('Redeem ho gaya!');}else{alert('Diamond kam hai, zombie game khelo!');} }
+
+// MINI ZOMBIE GAME (Offline)
+let canvas=document.getElementById('gameCanvas'),ctx=canvas.getContext('2d');
+let player={x:20,y:90,w:20,h:20}, bullets=[], zombies=[], score=0, kills=0, gameLoop, isPlaying=false;
+
+function startGame(){
+ bullets=[]; zombies=[]; score=0; kills=0; player.x=20;
+ isPlaying=true;
+ document.getElementById('score').innerText=0;
+ document.getElementById('kills').innerText=0;
+ if(gameLoop) clearInterval(gameLoop);
+ gameLoop=setInterval(update, 40);
+}
+function moveLeft(){ player.x=Math.max(0,player.x-15); }
+function moveRight(){ player.x=Math.min(280,player.x+15); }
+function shoot(){ bullets.push({x:player.x+20,y:player.y+8,w:8,h:3}); }
+
+function update(){
+ ctx.fillStyle='#0a0a0a'; ctx.fillRect(0,0,320,180);
+ // player
+ ctx.fillStyle='#FFD700'; ctx.fillRect(player.x,player.y,player.w,player.h);
+ ctx.fillStyle='#fff'; ctx.font='10px sans-serif'; ctx.fillText('YOU',player.x,player.y-3);
+ // bullets
+ ctx.fillStyle='#0ff';
+ bullets.forEach((b,i)=>{
+   b.x+=8;
+   ctx.fillRect(b.x,b.y,b.w,b.h);
+   if(b.x>320) bullets.splice(i,1);
+ });
+ // zombies spawn
+ if(Math.random()<0.05) zombies.push({x:300,y:20+Math.random()*140,w:18,h:18});
+ // zombies
+ ctx.fillStyle='#f00';
+ zombies.forEach((z,i)=>{
+   z.x-=2;
+   ctx.fillRect(z.x,z.y,z.w,z.h);
+   ctx.fillStyle='#fff'; ctx.fillText('🧟',z.x-2,z.y+14); ctx.fillStyle='#f00';
+   // collision bullet
+   bullets.forEach((b,j)=>{
+     if(b.x<z.x+z.w && b.x+b.w>z.x && b.y<z.y+z.h && b.y+b.h>z.y){
+       zombies.splice(i,1); bullets.splice(j,1);
+       score+=10; kills+=1;
+       document.getElementById('score').innerText=score;
+       document.getElementById('kills').innerText=kills;
+       if(kills%5==0){diamonds+=10; updateDiamond();}
+     }
+   });
+   if(z.x<0){ zombies.splice(i,1); score=Math.max(0,score-5); document.getElementById('score').innerText=score; }
+ });
+ // ground line
+ ctx.fillStyle='#333'; ctx.fillRect(0,170,320,2);
+}
+
+startGame();
+</script>
+</body>
+  </html>
