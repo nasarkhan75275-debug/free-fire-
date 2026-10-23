@@ -1,158 +1,76 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AL NASAR FF - FREE DIAMONDS</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>AL NASAR - Garena Free Fire</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#080808;color:#fff}
-:root{--y:#FFD700;--o:#FF6B00}
-header{display:flex;justify-content:space-between;padding:12px 15px;background:#111;border-bottom:2px solid var(--y);position:sticky;top:0;z-index:10}
-header h1{color:var(--y);font-weight:900;font-style:italic}
-.diamond-bar{background:#1a1a1a;padding:10px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
-.diamond-bar b{color:var(--y)}
-.hero{padding:20px;background:linear-gradient(#222,#080808);text-align:center;border-bottom:1px solid #222}
-.hero h2{font-size:32px;color:var(--y);font-style:italic;font-weight:900}
-.card{background:#151515;border:1px solid #222;border-radius:12px;padding:15px;margin:12px}
-.btn{width:100%;padding:12px;background:linear-gradient(90deg,var(--y),var(--o));color:#000;border:none;border-radius:8px;font-weight:900;cursor:pointer;margin-top:8px}
-.btn:active{transform:scale(0.97)}
-input{width:100%;padding:11px;background:#000;border:1px solid #333;border-radius:6px;color:#fff;margin-top:6px}
-#gameCanvas{width:100%;background:#000;border:2px solid var(--y);border-radius:10px;display:block;margin-top:10px;touch-action:none}
-.controls{display:flex;gap:10px;margin-top:8px}
-.controls button{flex:1;padding:12px;background:#222;color:#fff;border:1px solid #333;border-radius:8px;font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
+body{background:#121212;color:#fff}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:#000;position:sticky;top:0;z-index:99}
+header img{height:28px}
+header nav{display:flex;gap:18px;font-size:13px;font-weight:700;letter-spacing:1px}
+header nav a{color:#fff;text-decoration:none;opacity:.8} header nav a:hover{color:#ffba00}
+.hero{height:85vh;background:url('https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.com/2020/1.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center;padding:0 6%}
+.hero::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,#000 20%,transparent 80%)}
+.hero-content{position:relative;z-index:2;max-width:450px}
+.hero-content h1{font-size:52px;font-weight:900;font-style:italic;line-height:1;color:#fff;text-shadow:2px 2px 10px #000}
+.hero-content h1 span{color:#ffba00}
+.hero-content p{margin-top:12px;color:#ccc;font-size:14px;line-height:1.5}
+.btns{display:flex;gap:12px;margin-top:18px}
+.btn{padding:12px 26px;font-weight:900;border:none;cursor:pointer;font-style:italic}
+.btn-yellow{background:#ffba00;color:#000}
+.btn-black{background:rgba(0,0,0,0.6);color:#fff;border:1px solid #fff}
+.section{padding:40px 6%;background:#1a1a1a;border-top:1px solid #222}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
+.card{background:#222;border:1px solid #333;overflow:hidden}
+.card img{width:100%;height:150px;object-fit:cover}
+.card .info{padding:12px}
+.card .info h4{color:#ffba00;font-style:italic}
+.card .info p{font-size:12px;color:#aaa;margin-top:5px}
+.title{font-size:28px;font-weight:900;font-style:italic;border-left:4px solid #ffba00;padding-left:12px}
+.footer{background:#000;padding:20px;text-align:center;font-size:11px;color:#777}
 </style>
 </head>
 <body>
-<div style="max-width:480px;margin:0 auto;padding-bottom:20px">
 
 <header>
-<h1>AL NASAR FF</h1>
-<div><i class="fa-solid fa-gem" style="color:var(--y)"></i> <span id="diamondCount">0</span></div>
+<img src="https://ff.garena.com/static/images/logo.png" style="filter:brightness(10)">
+<nav>
+<a>GAME</a><a>CHARACTERS</a><a>NEWS</a><a style="color:#ffba00">AL NASAR FF</a>
+</nav>
 </header>
 
-<div class="diamond-bar">
-<span>💎 Your Diamonds</span>
-<b id="dCount2">0 Diamonds</b>
-</div>
-
 <div class="hero">
-<h2>BOOYAH! FREE DIAMONDS</h2>
-<p style="color:#aaa;font-size:13px;margin-top:5px">Offline khelo, Zombie maro, Free Diamond kamao</p>
+<div class="hero-content">
+<h1>AL NASAR <span>FREE FIRE</span></h1>
+<p>Garena Free Fire - Battle In Style. Ab AL NASAR Edition me. 50 Players, 1 Island, Booyah!</p>
+<div class="btns">
+<button class="btn btn-yellow" onclick="alert('Downloading AL NASAR FF...')">PLAY NOW</button>
+<button class="btn btn-black">WATCH TRAILER</button>
 </div>
-
-<!-- 1. FREE GIFT -->
-<div class="card">
-<h3 style="color:var(--y)"><i class="fa-solid fa-gift"></i> DAILY FREE GIFT</h3>
-<p style="font-size:12px;color:#aaa;margin:6px 0">Roz 100 Diamond free milega — bas claim karo</p>
-<button class="btn" onclick="claimFree()">CLAIM 100 FREE DIAMONDS 🎁</button>
-<p id="claimMsg" style="font-size:12px;color:#0f0;margin-top:6px;display:none"></p>
-</div>
-
-<!-- 2. OFFLINE ZOMBIE GAME -->
-<div class="card">
-<h3 style="color:var(--y)"><i class="fa-solid fa-skull"></i> OFFLINE ZOMBIE MODE</h3>
-<p style="font-size:12px;color:#aaa;margin:6px 0">Ye game bina internet ke chalta hai. Zombie maro = Diamond milega</p>
-<canvas id="gameCanvas" width="320" height="180"></canvas>
-<div class="controls">
-<button onclick="moveLeft()">◀ LEFT</button>
-<button onclick="shoot()" style="background:var(--y);color:#000">🔫 SHOOT</button>
-<button onclick="moveRight()">RIGHT ▶</button>
-</div>
-<div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px">
-<span>Score: <b id="score">0</b></span>
-<span>Zombies Killed: <b id="kills">0</b></span>
-</div>
-<button class="btn" style="background:#222;color:#fff;border:1px solid #333" onclick="startGame()">START / RESTART GAME</button>
-</div>
-
-<!-- 3. SHOP -->
-<div class="card">
-<h3 style="color:var(--y)">REWARD SHOP</h3>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
-<div style="background:#000;padding:10px;border-radius:8px;text-align:center;border:1px solid #222"><p>🎁 50 💎</p><button class="btn" style="padding:6px;font-size:12px" onclick="spend(50)">FREE CLAIM</button></div>
-<div style="background:#000;padding:10px;border-radius:8px;text-align:center;border:1px solid var(--y)"><p>🔥 500 💎</p><button class="btn" style="padding:6px;font-size:12px" onclick="alert('500 diamonds ke liye 5 zombie maro!')">PLAY & WIN</button></div>
 </div>
 </div>
 
+<div class="section">
+<div class="title">MEET CHARACTERS</div>
+<div class="grid">
+<div class="card"><img src="https://freefiremobile-a.akamaihd.net/common/web_event/official2.ff.garena.com/characters/alok.jpg"><div class="info"><h4>ALOK - DJ AL NASAR</h4><p>Drop the Beat - HP Recovery Skill</p></div></div>
+<div class="card"><img src="https://freefiremobile-a.akamaihd.net/common/web_event/official2.ff.garena.com/characters/chrono.jpg"><div class="info"><h4>CHRONO</h4><p>Time Turner - Shield Skill</p></div></div>
+<div class="card"><img src="https://freefiremobile-a.akamaihd.net/common/web_event/official2.ff.garena.com/characters/k.jpg"><div class="info"><h4>K - CAPTAIN</h4><p>Master of All - EP Skill</p></div></div>
+</div>
 </div>
 
-<script>
-// DIAMOND SYSTEM
-let diamonds = parseInt(localStorage.getItem('ff_diamonds')||'0');
-function updateDiamond(){document.getElementById('diamondCount').innerText=diamonds;document.getElementById('dCount2').innerText=diamonds+' Diamonds';localStorage.setItem('ff_diamonds',diamonds);}
-updateDiamond();
+<div class="section" style="background:#121212">
+<div class="title">FREE DIAMONDS GIFT - AL NASAR STORE</div>
+<div class="grid">
+<div class="card" style="text-align:center;padding:20px"><h2 style="color:#ffba00;font-size:40px">💎 100</h2><p>FREE DAILY CLAIM</p><button class="btn btn-yellow" style="width:100%;margin-top:10px" onclick="alert('100 Diamonds Claimed!')">CLAIM NOW</button></div>
+<div class="card" style="text-align:center;padding:20px"><h2 style="color:#ffba00;font-size:40px">💎 1000</h2><p>ZOMBIE HUNT REWARD</p><button class="btn btn-black" style="width:100%;margin-top:10px">PLAY ZOMBIE MODE</button></div>
+<div class="card" style="text-align:center;padding:20px"><h2 style="color:#ffba00;font-size:40px">🎁 BOX</h2><p>ELITE PASS FREE</p><button class="btn btn-black" style="width:100%;margin-top:10px">UNLOCK</button></div>
+</div>
+</div>
 
-function claimFree(){
- let last = localStorage.getItem('ff_lastClaim');
- let now = Date.now();
- if(last && now - last < 10000){ // 10 sec demo, asli me 24h kar dena
-   document.getElementById('claimMsg').style.display='block';
-   document.getElementById('claimMsg').innerText='Thodi der baad try karo! Demo me 10 sec ka cooldown hai';
-   return;
- }
- diamonds+=100;
- localStorage.setItem('ff_lastClaim',now);
- updateDiamond();
- document.getElementById('claimMsg').style.display='block';
- document.getElementById('claimMsg').innerText='BOOYAH! 100 Diamonds mil gaye 💎';
-}
-function spend(a){ if(diamonds>=a){diamonds-=a;updateDiamond();alert('Redeem ho gaya!');}else{alert('Diamond kam hai, zombie game khelo!');} }
+<div class="footer">© 2026 AL NASAR GAMING x Garena Free Fire Fan Edition | Made by Nasar Khan - Patna</div>
 
-// MINI ZOMBIE GAME (Offline)
-let canvas=document.getElementById('gameCanvas'),ctx=canvas.getContext('2d');
-let player={x:20,y:90,w:20,h:20}, bullets=[], zombies=[], score=0, kills=0, gameLoop, isPlaying=false;
-
-function startGame(){
- bullets=[]; zombies=[]; score=0; kills=0; player.x=20;
- isPlaying=true;
- document.getElementById('score').innerText=0;
- document.getElementById('kills').innerText=0;
- if(gameLoop) clearInterval(gameLoop);
- gameLoop=setInterval(update, 40);
-}
-function moveLeft(){ player.x=Math.max(0,player.x-15); }
-function moveRight(){ player.x=Math.min(280,player.x+15); }
-function shoot(){ bullets.push({x:player.x+20,y:player.y+8,w:8,h:3}); }
-
-function update(){
- ctx.fillStyle='#0a0a0a'; ctx.fillRect(0,0,320,180);
- // player
- ctx.fillStyle='#FFD700'; ctx.fillRect(player.x,player.y,player.w,player.h);
- ctx.fillStyle='#fff'; ctx.font='10px sans-serif'; ctx.fillText('YOU',player.x,player.y-3);
- // bullets
- ctx.fillStyle='#0ff';
- bullets.forEach((b,i)=>{
-   b.x+=8;
-   ctx.fillRect(b.x,b.y,b.w,b.h);
-   if(b.x>320) bullets.splice(i,1);
- });
- // zombies spawn
- if(Math.random()<0.05) zombies.push({x:300,y:20+Math.random()*140,w:18,h:18});
- // zombies
- ctx.fillStyle='#f00';
- zombies.forEach((z,i)=>{
-   z.x-=2;
-   ctx.fillRect(z.x,z.y,z.w,z.h);
-   ctx.fillStyle='#fff'; ctx.fillText('🧟',z.x-2,z.y+14); ctx.fillStyle='#f00';
-   // collision bullet
-   bullets.forEach((b,j)=>{
-     if(b.x<z.x+z.w && b.x+b.w>z.x && b.y<z.y+z.h && b.y+b.h>z.y){
-       zombies.splice(i,1); bullets.splice(j,1);
-       score+=10; kills+=1;
-       document.getElementById('score').innerText=score;
-       document.getElementById('kills').innerText=kills;
-       if(kills%5==0){diamonds+=10; updateDiamond();}
-     }
-   });
-   if(z.x<0){ zombies.splice(i,1); score=Math.max(0,score-5); document.getElementById('score').innerText=score; }
- });
- // ground line
- ctx.fillStyle='#333'; ctx.fillRect(0,170,320,2);
-}
-
-startGame();
-</script>
 </body>
-  </html>
+</html>
